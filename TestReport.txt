@@ -1,0 +1,115 @@
+-------------------------------------------------------------------------------
+Test set: HiddenPart1Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in HiddenPart1Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart2Test
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in HiddenPart2Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart3Test
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 sec - in HiddenPart3Test
+-------------------------------------------------------------------------------
+Test set: Part1Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in Part1Test
+-------------------------------------------------------------------------------
+Test set: Part2Test
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in Part2Test
+-------------------------------------------------------------------------------
+Test set: Part3Test
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in Part3Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart1Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in HiddenPart1Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart2Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in HiddenPart2Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart3Test
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.063 sec <<< FAILURE! - in HiddenPart3Test
+secret_flatten3()  Time elapsed: 0.01 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+flatten() is not returning the block colors in the correct order.
+========== TEST CASE ==========
+void secret_flatten3() {
+     RealBlock.gen = new Random(12221);
+     RealBlock rb = new RealBlock(4, 8);
+     rb.updateSizeAndPosition(32, 10, 90);
+
+     Block b = rb.toBlock();
+
+     Color[][] c = b.flatten();
+     Color[][] expected = rb.flatten();
+
+     for (int i = 0; i < c.length; i++) {
+         for (int j = 0; j < c[i].length; j++) {
+             assertEquals(expected[i][j], c[i][j]);
+         }
+     }
+ }
+ ================================
+ ==> expected: <java.awt.Color[r=204,g=0,b=0]> but was: <java.awt.Color[r=76,g=153,b=0]>
+	at HiddenPart3Test.secret_flatten3(Tester.java:1381)
+
+-------------------------------------------------------------------------------
+Test set: Part1Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in Part1Test
+-------------------------------------------------------------------------------
+Test set: Part2Test
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in Part2Test
+-------------------------------------------------------------------------------
+Test set: Part3Test
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in Part3Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart1Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in HiddenPart1Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart2Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in HiddenPart2Test
+-------------------------------------------------------------------------------
+Test set: HiddenPart1Test
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec <<< FAILURE! - in HiddenPart1Test
+secret_getBlocksToDraw2()  Time elapsed: 0.003 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+getBlocksToDraw() is returning incorrect shape/coordinates of BlocksToDraw.
+========== TEST CASE ==========
+public void secret_getBlocksToDraw2() {
+    RealBlock.gen = new Random(3103814);
+    RealBlock rb = new RealBlock(2, 6);
+    rb.updateSizeAndPosition(128, 10, 15);
+
+    Block b = rb.toBlock();
+
+    ArrayList<BlockToDraw> actual = b.getBlocksToDraw();
+    ArrayList<BlockToDraw> expected = rb.getBlocksToDraw();
+
+    for (int i = 0; i < expected.size(); i++) {
+        BlockToDraw btd = expected.get(i);
+        for (int j = 0; j < actual.size(); j++) {
+            BlockToDraw btd2 = actual.get(j);
+            if (btd.equals(btd2)){
+                actual.remove(j);
+                break;
+            }
+        }
+    }
+
+    assertEquals(0, actual.size());
+}
+================================
+ ==> expected: <0> but was: <38>
+	at HiddenPart1Test.secret_getBlocksToDraw2(Tester.java:858)
+
